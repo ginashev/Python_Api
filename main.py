@@ -20,3 +20,14 @@ for met in methods:
     if met == "HEAD":
         response = requests.head("https://playground.learnqa.ru/ajax/api/compare_query_type")
         print(met + response.text)
+
+methods = ["GET", "POST", "PUT", "DELETE"]
+for met in methods:
+        response = requests.get("https://playground.learnqa.ru/ajax/api/compare_query_type", params={"method": met})
+        print(met + response.text)
+        response = requests.post("https://playground.learnqa.ru/ajax/api/compare_query_type", data={"method": met})
+        print(met + response.text)
+        response = requests.put("https://playground.learnqa.ru/ajax/api/compare_query_type", data={"method": met})
+        print(met + response.text)
+        response = requests.delete("https://playground.learnqa.ru/ajax/api/compare_query_type", data={"method": met})
+        print(met + response.text)
