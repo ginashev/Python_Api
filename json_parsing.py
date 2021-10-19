@@ -1,12 +1,9 @@
 import json
 
-string_as_json_format = '{"messages":[{"message":"This is the first message","timestamp":"2021-06-04 16:40:53"},{"message":"And this is a second message","timestamp":"2021-06-04 16:41:01"}]}'
-obj = json.loads(string_as_json_format)
-key = "messages"
 
-if key in obj:
-    print(obj[key][1])
-else:
-    print(f"No key {key} in JSON")
-
-
+def get_key_from_json(string, key):
+    json_obj = json.loads(string)
+    if key in json_obj:
+        return json_obj[key]
+    else:
+        return f"No key {key} in JSON"
