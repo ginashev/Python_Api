@@ -6,7 +6,7 @@ class Environment:
     PROD = 'prod'
 
     URLS = {
-        DEV: 'https://playground.learnqa.ru/ajax/api_dev',
+        DEV: 'https://playground.learnqa.ru/api', #        DEV: 'https://playground.learnqa.ru/ajax/api_dev',
         PROD: 'https://playground.learnqa.ru/ajax/api'
     }
 
