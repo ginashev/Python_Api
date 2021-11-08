@@ -1,7 +1,8 @@
 from datetime import datetime
 import json.decoder
-
+from lib.my_requests import MyRequests
 from requests import Response
+from lib.assertions import Assertions
 
 
 class BaseCase:
@@ -36,3 +37,35 @@ class BaseCase:
             'lastName': 'learnqa',
             'email': email
         }
+
+    def edit_user_data_field(self, auth_sid, edit_field, token, user_id, code):
+        response = MyRequests.put(
+            f"/user/{user_id}",
+            headers={"x-csrf-token": token},
+            cookies={"auth_sid": auth_sid},
+            data=edit_field
+        )
+        Assertions.assert_code_status(response, code)
+        return response
+
+    def login(self, email, password):
+        login_data = {
+            'email': email,
+            'password': password
+        }
+        response2 = MyRequests.post("/user/login", data=login_data)
+        auth_sid = self.get_cookie(response2, "auth_sid")
+        token = self.get_header(response2, "x-csrf-token")
+        return auth_sid, token
+
+    def create_new_user(self):
+        register_data = self.prepare_registration_data()
+        response1 = MyRequests.post("/user", data=register_data)
+        Assertions.assert_code_status(response1, 200)
+        Assertions.assert_json_has_key(response1, "id")
+        email = register_data['email']
+        first_name = register_data['firstName']
+        password = register_data['password']
+        user_id = self.get_json_value(response1, "id")
+        user_name = register_data['username']
+        return email, first_name, password, user_id, user_name
