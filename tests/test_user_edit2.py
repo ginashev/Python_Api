@@ -8,7 +8,7 @@ class TestUserEdit(BaseCase):
         # REGISTER
         email, first_name, password, user_id, username = self.create_new_user()
         # LOGIN
-        auth_sid, token = self.login(email, password)
+        auth_sid, token, user_id1 = self.login(email, password)
 
         # EDIT
         edit_field = {"firstName": "new_name"}
@@ -32,7 +32,7 @@ class TestUserEdit(BaseCase):
         email, first_name, password, user_id, username = self.create_new_user()
 
         # LOGIN
-        auth_sid, token = self.login(email, password)
+        auth_sid, token, user_id1 = self.login(email, password)
 
         # EDIT
         edit_field = {"firstName": "new_name"}
@@ -60,7 +60,7 @@ class TestUserEdit(BaseCase):
         email, first_name, password, user_id, username = self.create_new_user()
 
         # LOGIN
-        auth_sid, token = self.login('vinkotov@example.com', '1234')
+        auth_sid, token, user_id1 = self.login('vinkotov@example.com', '1234')
 
         # EDIT
         edit_field = {"username": "new_username"}
@@ -87,7 +87,7 @@ class TestUserEdit(BaseCase):
         email, first_name, password, user_id, username = self.create_new_user()
 
         # LOGIN
-        auth_sid, token = self.login(email, password)
+        auth_sid, token, user_id1 = self.login(email, password)
 
         # EDIT
         new_name = "a"
@@ -124,7 +124,7 @@ class TestUserEdit(BaseCase):
         email, first_name, password, user_id, username = self.create_new_user()
 
         # LOGIN
-        auth_sid, token = self.login(email, password)
+        auth_sid, token, user_id1 = self.login(email, password)
 
         # EDIT
         edit_field = {"email": "vinkotov.example.com"}

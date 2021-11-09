@@ -53,10 +53,11 @@ class BaseCase:
             'email': email,
             'password': password
         }
-        response2 = MyRequests.post("/user/login", data=login_data)
-        auth_sid = self.get_cookie(response2, "auth_sid")
-        token = self.get_header(response2, "x-csrf-token")
-        return auth_sid, token
+        response = MyRequests.post("/user/login", data=login_data)
+        auth_sid = self.get_cookie(response, "auth_sid")
+        token = self.get_header(response, "x-csrf-token")
+        user_id = self.get_json_value(response, "user_id")
+        return auth_sid, token, user_id
 
     def create_new_user(self):
         register_data = self.prepare_registration_data()
@@ -69,3 +70,12 @@ class BaseCase:
         user_id = self.get_json_value(response1, "id")
         user_name = register_data['username']
         return email, first_name, password, user_id, user_name
+
+    def delete_user(self, auth_sid, token, user_id, code):
+        response = MyRequests.delete(
+            f"/user/{user_id}",
+            headers={"x-csrf-token": token},
+            cookies={"auth_sid": auth_sid},
+        )
+        Assertions.assert_code_status(response, code)
+        return response
