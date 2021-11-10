@@ -1,11 +1,14 @@
 import pytest
-
+import allure
 from lib.assertions import Assertions
 from lib.base_case import BaseCase
 from lib.my_requests import MyRequests
 
 
+@allure.epic("Delete user cases")
+@allure.feature("DeleteUser")
 class TestUserDelete(BaseCase):
+
     def test_delete_exist_user_negative(self):
         # LOGIN
         auth_sid, token, user_id = self.login('vinkotov@example.com', '1234')

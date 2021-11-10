@@ -6,12 +6,14 @@ from lib.assertions import Assertions
 from lib.my_requests import MyRequests
 
 
-@allure.epic("Autorization cases")
+@allure.epic("Authorization cases")
+@allure.feature("Authorization")
 class TestUserAuth(BaseCase):
     exclude_params = [
         ("no_cookie"),
         ("no_token")
     ]
+    allure.step("Setup")
 
     def setup(self):
         data = {

@@ -1,11 +1,15 @@
+import allure
+
 from lib.assertions import Assertions
 from lib.base_case import BaseCase
 from lib.my_requests import MyRequests
 
 
+@allure.epic("Edit user cases")
+@allure.feature("EditUser")
 class TestUserEdit(BaseCase):
+
     def test_edit_just_created_user_with_same_user(self):
-        # REGISTER
         email, first_name, password, user_id, username = self.create_new_user()
         # LOGIN
         auth_sid, token, user_id1 = self.login(email, password)
@@ -145,7 +149,3 @@ class TestUserEdit(BaseCase):
             email,
             "Wrong name of the user email edit"
         )
-
-
-
-
